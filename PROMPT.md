@@ -1,17 +1,17 @@
 You are helping me run a 60-minute live university workshop on practical AI-assisted development. 
-We will build a small .NET 8 application **together, step by step**, demonstrating how GitHub 
+We will build a small .NET 10 application **together, step by step**, demonstrating how GitHub 
 Copilot helps across the entire Software Development Lifecycle (Plan → Design → Develop → Test 
 → Build → Deploy → Operate → Document).
 
 ## The application: "DevQuote"
-A **.NET 8 Minimal Web API** that manages a collection of developer quotes (author + text + tags), 
+A **.NET 10 Minimal Web API** that manages a collection of developer quotes (author + text + tags), 
 with Swagger UI, an in-memory repository, structured logging, a health endpoint, unit tests, 
 and a GitHub Actions CI workflow.
 
 ## Hard constraints
 - Total time budget: **60 minutes**. Keep every step small and runnable. Leave buffer time — 
   don't rush to fill every minute.
-- Target: **.NET 8**, C# 12, Minimal APIs (no MVC controllers), nullable enabled.
+- Target: **.NET 10**, C# 14, Minimal APIs (no MVC controllers), nullable enabled.
 - Single solution, two projects: `DevQuote.Api` and `DevQuote.Tests` (xUnit + FluentAssertions).
 - No database — use a thread-safe in-memory `ConcurrentDictionary` repository behind an interface.
 - **Docker is out of scope** for the live build (students don't have Docker installed), but you 
@@ -58,10 +58,12 @@ Run `dotnet publish -c Release` and show the produced artifacts. **Briefly menti
 that Copilot can generate a production-ready multi-stage Dockerfile from a one-line 
 request — this is the modern way to ship .NET services.
 
-### 7. Deploy (CI)
-Add `.github/workflows/ci.yml` that restores, builds, and tests on push/PR. Explain 
-each job briefly. Mention that adding a deploy job (to Azure, AWS, or a container 
-registry) is a one-prompt extension.
+### 7. Deploy (CI) — instructor demo
+Students are not required to have Git or a GitHub account set up. Generate 
+`.github/workflows/ci.yml` (restore, build, test on push/PR) so it exists in the 
+project, and briefly explain each job — the **instructor will demonstrate** pushing 
+to GitHub and watching the workflow run. Mention that adding a deploy job (to Azure, 
+AWS, or a container registry) is a one-prompt extension.
 
 ### 8. Operate
 Add a `/health` endpoint, Serilog console logging with request logging middleware, 

@@ -1,19 +1,19 @@
 # DevQuote Workshop
 
-A 60-minute hands-on workshop: build a small .NET 8 Web API from scratch using **GitHub Copilot**, covering every phase of the Software Development Lifecycle.
+A 60-minute hands-on workshop: build a small .NET 10 Web API from scratch using **GitHub Copilot**, covering every phase of the Software Development Lifecycle.
 
 By the end you'll have a working, tested, CI-wired REST API that stores developer quotes — and, more importantly, you'll have seen how AI assists at every stage: planning, design, coding, testing, packaging, deployment, operations, and documentation.
 
 ## What we're building: DevQuote
 
-A **.NET 8 Minimal Web API** that manages a collection of developer quotes.
+A **.NET 10 Minimal Web API** that manages a collection of developer quotes.
 
 - 5 REST endpoints (list, get, create, update, delete)
 - In-memory storage (no database to install)
 - Swagger UI to try endpoints in the browser
 - Unit + integration tests
 - `/health` endpoint and structured logging
-- GitHub Actions CI pipeline
+- GitHub Actions CI pipeline *(demonstrated by the instructor — students don't need Git/GitHub set up)*
 
 ## How to use this prompt
 

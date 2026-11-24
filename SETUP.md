@@ -2,9 +2,9 @@
 
 Please have everything below working **before** the session starts. We only have 60 minutes and no time for installs.
 
-## 1. .NET 8 SDK
+## 1. .NET 10 SDK
 
-Download and install from <https://dotnet.microsoft.com/download/dotnet/8.0>.
+Download and install from <https://dotnet.microsoft.com/download/dotnet/10.0>.
 
 Verify:
 
@@ -12,7 +12,7 @@ Verify:
 dotnet --version
 ```
 
-You should see `8.0.x`.
+You should see `10.0.x`.
 
 ## 2. Visual Studio Code
 
@@ -36,36 +36,18 @@ Verify Copilot works:
 2. Open the Copilot Chat panel (chat icon in the sidebar, or Ctrl+Alt+I)
 3. Type "hello" — you should get a reply
 
-## 5. Git
+## 5. Quick self-test
 
-Download from <https://git-scm.com/downloads>.
-
-Verify:
-
-```bash
-git --version
-```
-
-## 6. A GitHub account
-
-If you don't have one: <https://github.com/signup>. You'll push your finished DevQuote to your own repo at the end.
-
-## 7. (Optional but nice) PowerShell 7 or a Unix-like shell
-
-Any terminal works, but the workshop commands assume a shell where `curl` is available. On Windows, PowerShell 7 or Git Bash both work.
-
-## Quick self-test
-
-Run these — all four should succeed:
+Run these — both should succeed:
 
 ```bash
 dotnet --version
-git --version
 code --version
-curl --version
 ```
 
-If any fail, fix them before the workshop. Bring questions to the start of the session if stuck.
+If either fails, fix it before the workshop. Bring questions to the start of the session if stuck.
+
+> Git, GitHub, and the CI/deploy parts will be **demonstrated by the instructor** — you don't need to install Git or have a GitHub account to follow along.
 
 ## That's it
 
