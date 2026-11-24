@@ -14,11 +14,22 @@ and a GitHub Actions CI workflow.
 - Target: **.NET 10**, C# 14, Minimal APIs (no MVC controllers), nullable enabled.
 - Single solution, two projects: `DevQuote.Api` and `DevQuote.Tests` (xUnit + FluentAssertions).
 - No database — use a thread-safe in-memory `ConcurrentDictionary` repository behind an interface.
-- **Docker is out of scope** for the live build (students don't have Docker installed), but you 
-  should briefly mention during the "Build & Package" phase that containerization is the modern 
-  packaging approach and that Copilot can generate a Dockerfile on demand — just don't create one.
+- **Generate a Dockerfile** during the "Build & Package" phase (multi-stage, production-ready) 
+  so students can see what one looks like. Students don't have Docker installed, so **do not** 
+  ask them to build or run the image — show the file, walk through the stages briefly, and move on.
 - After each step, **pause and tell me the exact commands to run** so students can see output 
   (dotnet run, curl, dotnet test, etc.). Do not batch everything at once.
+- **All terminal commands must be PowerShell-compatible, single-line, copy-pasteable into the 
+  VS Code integrated terminal on Windows.** Specifically:
+  - No multi-line commands, no backtick line continuations, no heredocs.
+  - Prefer native PowerShell cmdlets over `curl` for HTTP requests — use `Invoke-RestMethod` with 
+    a hashtable piped to `ConvertTo-Json`, so there is no quote-escaping. If you must use curl, 
+    use `curl.exe` (not the PowerShell alias) and keep the whole command on one line.
+  - Use single quotes for string literals where possible to avoid PowerShell variable expansion 
+    issues.
+  - Separate multiple statements with `;` on one line when the student needs to run them together 
+    (e.g. capture a response and extract an id), but prefer giving one command at a time.
+  - Never use smart/curly quotes — only straight ASCII quotes.
 
 ## Walk us through these phases in order, announcing each phase explicitly
 
@@ -53,10 +64,12 @@ Create unit tests for the repository and integration tests for the endpoints usi
 `WebApplicationFactory`. Aim for ~6–8 focused tests. Run them and show results.
 
 ### 6. Build & Package
-Run `dotnet publish -c Release` and show the produced artifacts. **Briefly mention** 
-(don't implement) that in a real project this is where a Dockerfile would live, and 
-that Copilot can generate a production-ready multi-stage Dockerfile from a one-line 
-request — this is the modern way to ship .NET services.
+Run `dotnet publish -c Release` and show the produced artifacts. Then **generate a 
+production-ready multi-stage `Dockerfile`** at the repo root (SDK image for build, 
+ASP.NET runtime image for the final stage, non-root user, exposed port). Walk through 
+the stages in one short paragraph so students see how containerization works. Do **not** 
+ask them to build or run the image — they don't have Docker installed. Also add a 
+`.dockerignore` next to the Dockerfile.
 
 ### 7. Deploy (CI) — instructor demo
 Students are not required to have Git or a GitHub account set up. Generate 
@@ -80,7 +93,7 @@ endpoint table, and a "Built with Copilot in 60 minutes" note.
 - If something would take longer than its time slot, say so and offer a shorter variant.
 - At the very end, print a short retrospective: which phase benefited most from AI, 
   which Copilot customization feature we actually used vs. just mentioned, and one 
-  suggestion for what a student could extend as homework (e.g. "add a Dockerfile — 
-  ask Copilot: 'add a multi-stage Dockerfile for this API'").
+  suggestion for what a student could extend as homework (e.g. swap the in-memory 
+  repository for SQLite + EF Core, or add a `/quotes/random` endpoint).
 
 Start now with **Phase 1: Customization & Memory**.
