@@ -88,10 +88,16 @@ ask them to build or run the image — they don't have Docker installed. Also ad
 
 ### 7. Deploy (CI) — instructor demo
 Students are not required to have Git or a GitHub account set up. Generate 
-`.github/workflows/ci.yml` (restore, build, test on push/PR) so it exists in the 
-project, and briefly explain each job — the **instructor will demonstrate** pushing 
-to GitHub and watching the workflow run. Mention that adding a deploy job (to Azure, 
-AWS, or a container registry) is a one-prompt extension.
+`.github/workflows/ci.yml` with these jobs, in order, on push/PR:
+1. `dotnet restore` + `dotnet test` on the runner — fast feedback with readable test output.
+2. `docker build` using the Dockerfile from Phase 6 — the production compile happens inside 
+   the image's SDK stage, so there is **no standalone `dotnet build` step**. The container 
+   image is the build artifact.
+
+Briefly explain the story: *"CI runs the tests, then packages the app into a container — one 
+build artifact, one deploy target."* Mention that adding a push-to-registry + deploy job 
+(Azure, AWS, GHCR) is a one-prompt extension, but we won't add it today. The **instructor 
+will demonstrate** pushing to GitHub and watching the workflow run.
 
 ### 8. Operate
 Add a `/health` endpoint, Serilog console logging with request logging middleware, 
