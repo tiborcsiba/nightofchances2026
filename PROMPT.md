@@ -41,8 +41,12 @@ to the students, in the chat output, that:
 - **Prompt files** (`.github/prompts/*.prompt.md`) = reusable task recipes invoked with `/name`
 - **Custom chat modes / agents** = scoped personas with their own tools and instructions
 - **MCP servers** = external tools/data sources Copilot can call
+
 Also create one example prompt file: `.github/prompts/add-endpoint.prompt.md` that scaffolds 
-a new endpoint + test from a one-line description. Mention it but don't use it yet.
+a new endpoint + test from a one-line requirement. **We will actually invoke this prompt file 
+in Phase 4** — so make sure its instructions are concrete enough to produce a working endpoint 
+(reuse the existing repository, follow the same Minimal API patterns, add an integration test, 
+return a summary + commands to run).
 
 ### 2. Plan
 Generate 3–4 user stories in "As a … I want … so that …" form, each with 2–3 acceptance 
@@ -55,9 +59,20 @@ rationale for choices.
 
 ### 4. Develop
 Scaffold the solution and both projects, implement the `Quote` model, `IQuoteRepository` 
-+ `InMemoryQuoteRepository`, DI registration, all five endpoints with input validation 
-and proper status codes, and Swagger UI enabled in Development. Give me the curl commands 
-to try each endpoint.
++ `InMemoryQuoteRepository`, DI registration, and **four of the five endpoints** (GET all, 
+GET by id, POST, PUT) with input validation and proper status codes, and Swagger UI enabled 
+in Development. Give me the `Invoke-RestMethod` commands to try each endpoint.
+
+Then **stop and instruct me (the instructor) to add the DELETE endpoint by invoking the 
+prompt file we created in Phase 1**, like this:
+
+> "Now run `/add-endpoint Requirement: add DELETE /quotes/{id} that removes a quote and 
+> returns 204 No Content, or 404 if the id does not exist` in Copilot Chat to scaffold 
+> the last endpoint from the reusable prompt."
+
+Explain to students in one sentence why this matters: the prompt file enforces the same 
+conventions (Minimal API style, repo reuse, integration test) without the instructor 
+having to re-state them. Wait for me to run it before continuing to Phase 5.
 
 ### 5. Test
 Create unit tests for the repository and integration tests for the endpoints using 
